@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/slimeball.wav-4b4e4ff9d08ec7651e3cb0aad25b69c3.sample"
+
+[deps]
+
+source_file="res://assets/SFX/slimeball.wav"
+dest_files=[ "res://.import/slimeball.wav-4b4e4ff9d08ec7651e3cb0aad25b69c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

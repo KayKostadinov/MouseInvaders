@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rifleprimary2.ogg-0cf65ec7e8847a9e410b08801602c8e0.oggstr"
+
+[deps]
+
+source_file="res://assets/SFX/Rifleprimary2.ogg"
+dest_files=[ "res://.import/Rifleprimary2.ogg-0cf65ec7e8847a9e410b08801602c8e0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
