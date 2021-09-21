@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Background.jpg" type="Texture" id=2]
+[ext_resource path="res://scripts/BulletManager.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=5]
+
+[node name="Level1" type="Node2D"]
+
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 964, 544 )
+scale = Vector2( 1.0125, 1.03704 )
+texture = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 733.851, 575.789 )
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Enemy" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( 1486.14, 356.943 )
