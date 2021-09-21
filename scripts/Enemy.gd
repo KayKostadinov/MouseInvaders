@@ -66,6 +66,8 @@ func kamikaze():
 func _on_Sprite_animation_finished():
 	if sprite.animation.get_basename() == "die":
 		queue_free()
+	else:
+		sprite.play("idle")
 
 
 func die():
@@ -75,7 +77,8 @@ func die():
 		sprite.scale.y = 1
 
 
-func instance_bullet():
+func shoot():
+	sprite.play("shoot")
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = GunTip.global_position
 	bullet_instance.rotation_degrees = rotation_degrees
@@ -84,6 +87,6 @@ func instance_bullet():
 
 
 func _on_Timer_timeout():
-	instance_bullet()
+	shoot()
 	timer.start()
 

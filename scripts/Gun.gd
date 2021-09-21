@@ -8,8 +8,8 @@ onready var GunTip = $GunTip
 
 
 func _physics_process(delta):
-	look_at(get_global_mouse_position())	
-	fire(delta)
+	look_at(get_global_mouse_position())
+	fire()
 
 
 func instance_bullet():
@@ -19,7 +19,7 @@ func instance_bullet():
 	bullet_instance.velocity = bullet_instance.velocity.rotated(rotation)
 	BulletManager.add_child(bullet_instance)
 
-func fire(delta):
+func fire():
 	var fire = Input.is_action_just_pressed("fire")
 	
 	if fire:
