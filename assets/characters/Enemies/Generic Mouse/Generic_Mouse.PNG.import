@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/IMG_0066.PNG-ff12b57a88371542ec6e03762b266e2a.stex"
+path="res://.import/Generic_Mouse.PNG-35761bd0a67a6968face0d6d66959c4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Enemies/Generic Mouse/IMG_0066.PNG"
-dest_files=[ "res://.import/IMG_0066.PNG-ff12b57a88371542ec6e03762b266e2a.stex" ]
+source_file="res://assets/characters/Enemies/Generic Mouse/Generic_Mouse.PNG"
+dest_files=[ "res://.import/Generic_Mouse.PNG-35761bd0a67a6968face0d6d66959c4d.stex" ]
 
 [params]
 

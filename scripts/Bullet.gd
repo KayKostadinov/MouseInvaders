@@ -1,7 +1,8 @@
 extends Area2D
+class_name Bullet
 
 
-var velocity = Vector2(500, 0)
+var velocity = Vector2(1000, 0)
 var damage = 20
 
 

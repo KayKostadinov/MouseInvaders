@@ -12,7 +12,7 @@ func _physics_process(delta):
 	fire(delta)
 
 
-func instance():
+func instance_bullet():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = GunTip.global_position
 	bullet_instance.rotation_degrees = rotation_degrees
@@ -23,5 +23,5 @@ func fire(delta):
 	var fire = Input.is_action_just_pressed("fire")
 	
 	if fire:
-		instance()
+		instance_bullet()
 

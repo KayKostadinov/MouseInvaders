@@ -24,3 +24,18 @@ script = ExtResource( 5 )
 
 [node name="Enemy" parent="EnemyManager" instance=ExtResource( 4 )]
 position = Vector2( 1486.14, 356.943 )
+
+[node name="Enemy2" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( -182.63, 981.788 )
+
+[node name="Enemy3" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( 1820.27, 1032.76 )
+
+[node name="Enemy4" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( 1342.67, 3.93399 )
+
+[node name="Enemy5" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( 840.53, 959.135 )
+
+[node name="Enemy6" parent="EnemyManager" instance=ExtResource( 4 )]
+position = Vector2( 419.562, 168.168 )
