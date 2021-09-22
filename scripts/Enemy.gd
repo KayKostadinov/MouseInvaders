@@ -46,6 +46,7 @@ func get_direction() -> Vector2:
 
 
 func position_sprite():
+	look_at(Player.global_position)
 	if direction.x < 0:
 		sprite.flip_v = true
 		return

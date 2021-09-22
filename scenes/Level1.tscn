@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Backgrounds/Background.jpg" type="Texture" id=2]
 [ext_resource path="res://scripts/BulletManager.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Enemies/ShootingMouse.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Navigation2D.gd" type="Script" id=4]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Points.gd" type="Script" id=6]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 1891.1, 31.2685, 1892.17, 1037.84, 1709.56, 845.521, 1704.22, 196.789, 39.3882, 29.3972, 182.507, 188.78, 39.3882, 1037.84, 185.177, 861.539 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 6, 4, 5, 7 ), PoolIntArray( 2, 1, 6, 7 ) ]
+outlines = [ PoolVector2Array( 39.3882, 29.3972, 39.3882, 1037.84, 1892.17, 1037.84, 1891.1, 31.2685 ), PoolVector2Array( 182.507, 188.78, 185.177, 861.539, 1709.56, 845.521, 1704.22, 196.789 ) ]
 
 [node name="Level1" type="Node2D"]
 
@@ -32,6 +38,7 @@ script = ExtResource( 3 )
 script = ExtResource( 5 )
 
 [node name="Points" type="Node2D" parent="EnemyManager"]
+script = ExtResource( 6 )
 
 [node name="Position2D" type="Position2D" parent="EnemyManager/Points"]
 position = Vector2( 68.0358, 60.4762 )
@@ -45,5 +52,14 @@ position = Vector2( 1804.21, 955.021 )
 [node name="Position2D4" type="Position2D" parent="EnemyManager/Points"]
 position = Vector2( 88.1943, 985.259 )
 
-[node name="Enemy" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 244.425, 183.949 )
+[node name="Navigation2D" type="Navigation2D" parent="EnemyManager"]
+script = ExtResource( 4 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="EnemyManager/Navigation2D"]
+navpoly = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="EnemyManager"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]
