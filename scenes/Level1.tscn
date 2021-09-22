@@ -1,12 +1,21 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/Background.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/Backgrounds/Background.jpg" type="Texture" id=2]
 [ext_resource path="res://scripts/BulletManager.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Enemies/ShootingMouse.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=5]
 
 [node name="Level1" type="Node2D"]
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+collision_layer = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounds"]
+polygon = PoolVector2Array( -8.09566, 1096.58, 1944.23, 1106.81, 1941.56, -22.4626, -4.63855, -17.1232, -8.09566, 1094.46, -71.3806, 1077.45, -60.7018, -57.1684, 1984.27, -70.5168, 1989.61, 1178.89, -79.3896, 1162.88, -47.3535, 1104.14 )
 
 [node name="bg" type="Sprite" parent="."]
 position = Vector2( 964, 544 )
@@ -22,20 +31,19 @@ script = ExtResource( 3 )
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
+[node name="Points" type="Node2D" parent="EnemyManager"]
+
+[node name="Position2D" type="Position2D" parent="EnemyManager/Points"]
+position = Vector2( 68.0358, 60.4762 )
+
+[node name="Position2D2" type="Position2D" parent="EnemyManager/Points"]
+position = Vector2( 1814.29, 93.2342 )
+
+[node name="Position2D3" type="Position2D" parent="EnemyManager/Points"]
+position = Vector2( 1804.21, 955.021 )
+
+[node name="Position2D4" type="Position2D" parent="EnemyManager/Points"]
+position = Vector2( 88.1943, 985.259 )
+
 [node name="Enemy" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 1486.14, 356.943 )
-
-[node name="Enemy2" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( -182.63, 981.788 )
-
-[node name="Enemy3" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 1820.27, 1032.76 )
-
-[node name="Enemy4" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 1342.67, 3.93399 )
-
-[node name="Enemy5" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 840.53, 959.135 )
-
-[node name="Enemy6" parent="EnemyManager" instance=ExtResource( 4 )]
-position = Vector2( 419.562, 168.168 )
+position = Vector2( 244.425, 183.949 )

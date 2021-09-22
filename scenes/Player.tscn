@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/characters/Winter/Winter.PNG" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -6,52 +6,67 @@
 [ext_resource path="res://assets/gun.PNG" type="Texture" id=4]
 [ext_resource path="res://assets/characters/Winter/Winter_DEAD.PNG" type="Texture" id=5]
 [ext_resource path="res://assets/characters/Winter/Winter_ATTACK.PNG" type="Texture" id=6]
+[ext_resource path="res://assets/gun_fire.PNG" type="Texture" id=7]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "die",
+"name": "attack",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), null, ExtResource( 1 ), null, ExtResource( 1 ), null ],
 "loop": true,
 "name": "damage",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 67.0628
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "fire",
+"speed": 1.0
+} ]
+
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 10
+collision_mask = 26
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Gun" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="Gun"]
+[node name="Sprite" type="AnimatedSprite" parent="Gun"]
 position = Vector2( 151.321, 4.24265 )
 scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 4 )
+frames = SubResource( 3 )
+animation = "idle"
 
 [node name="GunTip" type="Position2D" parent="Gun"]
 position = Vector2( 264.233, 6.04863 )

@@ -1,10 +1,10 @@
-extends KinematicBody2D
+extends IDamageable
+class_name Player
+
 
 var move_speed := 400
-var hp := 100
 var attack_damage := 20
 var attack_cd := .5
-var is_shielded := false
 var velocity
 
 onready var sprite = $Sprite
@@ -14,7 +14,7 @@ func _init():
 	Global.Player = self
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move()
 
 
@@ -28,9 +28,8 @@ func move():
 	velocity = move_and_slide(get_input() * move_speed)
 
 
-
 func take_damage(damage):
-	hp -= damage
+	.take_damage(damage)
 	sprite.play("damage")
 
 

@@ -5,85 +5,85 @@
 [ext_resource path="res://assets/VFX/Explosion.png" type="Texture" id=3]
 [ext_resource path="res://assets/characters/Enemies/Generic Mouse/Generic_Mouse_SHOOT.PNG" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 96, 96 )
+region = Rect2( 0, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 96, 0, 96, 96 )
+region = Rect2( 192, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 192, 0, 96, 96 )
+region = Rect2( 384, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 288, 0, 96, 96 )
+region = Rect2( 576, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=19]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 96, 96 )
+region = Rect2( 768, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=20]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 480, 0, 96, 96 )
+region = Rect2( 960, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=21]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 576, 0, 96, 96 )
+region = Rect2( 1152, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=22]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 672, 0, 96, 96 )
+region = Rect2( 1344, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=23]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 768, 0, 96, 96 )
+region = Rect2( 1536, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=24]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 864, 0, 96, 96 )
+region = Rect2( 1728, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=25]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 960, 0, 96, 96 )
+region = Rect2( 1920, 0, 192, 192 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=26]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 1056, 0, 96, 96 )
+region = Rect2( 2112, 0, 192, 192 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "idle",
 "speed": 1.0
 }, {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": false,
+"name": "die",
+"speed": 24.0
+}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "shoot",
 "speed": 4.0
-}, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
-"loop": false,
-"name": "die",
-"speed": 24.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=14]
 radius = 27.5552
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -94,12 +94,12 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.25, 0.25 )
-frames = SubResource( 2 )
+frames = SubResource( 13 )
 animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 14 )
 
 [node name="GunTip" type="Position2D" parent="."]
 position = Vector2( 46.0866, 0.529724 )

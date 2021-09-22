@@ -14,12 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Bullet.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Character",
-"language": "GDScript",
-"path": "res://scripts/Character.gd"
-}, {
-"base": "KinematicBody2D",
+"base": "IDamageable",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scripts/Enemy.gd"
@@ -28,12 +23,29 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
+}, {
+"base": "KinematicBody2D",
+"class": "IDamageable",
+"language": "GDScript",
+"path": "res://scripts/IDamagable.gd"
+}, {
+"base": "IDamageable",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scripts/Player.gd"
+}, {
+"base": "Enemy",
+"class": "ShootingMouse",
+"language": "GDScript",
+"path": "res://scripts/Enemies/ShootingMouse.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Character": "",
 "Enemy": "",
-"GitAPI": ""
+"GitAPI": "",
+"IDamageable": "",
+"Player": "",
+"ShootingMouse": ""
 }
 
 [application]
@@ -45,6 +57,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://scripts/Global.gd"
+IDamagable="*res://scripts/IDamagable.gd"
 
 [display]
 
@@ -89,6 +102,7 @@ fire={
 2d_physics/layer_2="Enemy"
 2d_physics/layer_3="Player_bullet"
 2d_physics/layer_4="Enemy_bullet"
+2d_physics/layer_5="Bounds"
 
 [physics]
 

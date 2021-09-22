@@ -1,49 +1,44 @@
-extends KinematicBody2D
+extends IDamageable
 class_name Enemy
+
 
 
 var ms = 100
 var collider
-var hp = 100
 var direction = Vector2.ZERO
-var is_dead = false
 
 onready var Player = Global.Player
+onready var EnemyManagar = Global.EnemyManager
 onready var sprite = $Sprite
 onready var timer = $Timer
 
 var bullet = preload("res://scenes/EnemyBullet.tscn")
 
-onready var BulletManager = Global.BulletManager
 onready var GunTip = $GunTip
 
 func _ready():
-	randomize()
-	timer.wait_time = randi() % 5 + 1
+	random_timer()
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	die()
-	move(delta)
 	kamikaze()
-	
 
 
-func _process(delta):
+func _process(_delta):
 	direction = get_direction()
 	position_sprite()
 
 
 func take_damage(damage):
-	hp -= damage
-	if hp <= 0:
-		is_dead = true
-		$CollisionShape2D.disabled = true
+	.take_damage(damage)
+	if is_dead:
+		$CollisionShape2D.set_deferred("disabled", true)
 
 
-func move(delta):
-	if not is_dead:
-		look_at(Player.global_position)
-		collider = move_and_collide(direction * delta * ms)
+func random_timer():
+	randomize()
+	timer.wait_time = (randi() % 5 + 1) + randf()
 
 
 func get_direction() -> Vector2:
@@ -58,7 +53,7 @@ func position_sprite():
 
 
 func kamikaze():
-	if collider and collider.collider.name == "Player":
+	if collider and collider.collider is IDamageable:
 		collider.collider.take_damage(10)
 		take_damage(100)
 
@@ -73,20 +68,5 @@ func _on_Sprite_animation_finished():
 func die():
 	if is_dead:
 		sprite.play("die")
-		sprite.scale.x = 1
-		sprite.scale.y = 1
 
-
-func shoot():
-	sprite.play("shoot")
-	var bullet_instance = bullet.instance()
-	bullet_instance.position = GunTip.global_position
-	bullet_instance.rotation_degrees = rotation_degrees
-	bullet_instance.velocity = bullet_instance.velocity.rotated(rotation)
-	BulletManager.add_child(bullet_instance)
-
-
-func _on_Timer_timeout():
-	shoot()
-	timer.start()
 
