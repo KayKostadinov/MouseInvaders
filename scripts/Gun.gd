@@ -6,6 +6,7 @@ var is_stunned = false
 
 onready var BulletManager = Global.BulletManager
 onready var GunTip = $GunTip
+onready var sprite = $Sprite
 onready var player = get_tree().get_root()
 
 
@@ -28,5 +29,10 @@ func fire():
 	var fire = Input.is_action_just_pressed("fire")
 	
 	if fire:
+		sprite.play("fire")
 		instance_bullet()
 
+
+
+func _on_Sprite_animation_finished():
+	sprite.play("idle")

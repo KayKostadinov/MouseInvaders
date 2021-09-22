@@ -47,9 +47,9 @@ animations = [ {
 "speed": 1.0
 }, {
 "frames": [ ExtResource( 7 ) ],
-"loop": true,
+"loop": false,
 "name": "fire",
-"speed": 1.0
+"speed": 10.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
@@ -80,4 +80,5 @@ position = Vector2( 264.233, 6.04863 )
 [node name="Stun" type="Timer" parent="."]
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="animation_finished" from="Gun/Sprite" to="Gun" method="_on_Sprite_animation_finished"]
 [connection signal="timeout" from="Stun" to="." method="_on_Stun_timeout"]
