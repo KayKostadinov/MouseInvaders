@@ -22,12 +22,6 @@ func _ready():
 func _physics_process(_delta):
 	navigate()
 
-# TODO: move function to close ranged enemies
-#func move(delta):
-#	if not is_dead:
-#		look_at(Player.global_position)
-#		collider = move_and_collide(direction * delta * ms)
-
 
 func make_path():
 	

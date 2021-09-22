@@ -8,7 +8,6 @@ var collider
 var direction = Vector2.ZERO
 
 onready var Player = Global.Player
-onready var EnemyManagar = Global.EnemyManager
 onready var sprite = $Sprite
 onready var timer = $Timer
 

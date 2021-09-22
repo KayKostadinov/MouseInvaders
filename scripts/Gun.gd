@@ -2,12 +2,17 @@ extends Node2D
 
 var bullet = preload("res://scenes/Bullet.tscn")
 var bullet_speed = Vector2(1000, 1000)
+var is_stunned = false
 
 onready var BulletManager = Global.BulletManager
 onready var GunTip = $GunTip
+onready var player = get_tree().get_root()
 
 
 func _physics_process(_delta):
+	if is_stunned:
+		return
+	
 	look_at(get_global_mouse_position())
 	fire()
 
