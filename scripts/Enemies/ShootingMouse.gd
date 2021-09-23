@@ -78,6 +78,7 @@ func shoot():
 	bullet_instance.position = GunTip.global_position
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.velocity = bullet_instance.velocity.rotated(rotation)
+	bullet_instance.damage = damage * damage_multiplier
 	BulletManager.add_child(bullet_instance)
 
 

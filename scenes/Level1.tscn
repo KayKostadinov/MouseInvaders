@@ -17,16 +17,20 @@ outlines = [ PoolVector2Array( 39.3882, 29.3972, 39.3882, 1037.84, 1892.17, 1037
 [node name="Bounds" type="StaticBody2D" parent="."]
 collision_layer = 16
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounds"]
-polygon = PoolVector2Array( -8.09566, 1096.58, 1944.23, 1106.81, 1941.56, -22.4626, -4.63855, -17.1232, -8.09566, 1094.46, -71.3806, 1077.45, -60.7018, -57.1684, 1984.27, -70.5168, 1989.61, 1178.89, -79.3896, 1162.88, -47.3535, 1104.14 )
+polygon = PoolVector2Array( -10, 1080, 1943, 1084, 1941.56, -22.4626, -4.63855, -17.1232, -6, 1076, -71.3806, 1077.45, -60.7018, -57.1684, 1984.27, -70.5168, 1989.61, 1178.89, -79.3896, 1162.88, -47.3535, 1104.14 )
 
 [node name="bg" type="Sprite" parent="."]
 position = Vector2( 964, 544 )
 scale = Vector2( 1.0125, 1.03704 )
 texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 733.851, 575.789 )

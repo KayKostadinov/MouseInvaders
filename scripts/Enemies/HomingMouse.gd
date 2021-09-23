@@ -4,6 +4,11 @@ extends Enemy
 var move_away = false
 onready var moveTimer = $MoveAway
 
+
+func _init():
+	damage = 5
+
+
 func _physics_process(delta):
 	move(delta, move_away)
 
@@ -16,14 +21,26 @@ func move(delta, _move_away):
 		look_at(Player.global_position)
 		collider = move_and_collide(direction * delta * ms) 
 
+var dont_stun = false
 
 func kamikaze():
 	if collider and collider.collider is IDamageable:
-		collider.collider.take_damage(5)
-		collider.collider.stun()
-		move_away = true
-		moveTimer.start()
+		if collider.collider.is_shielded:
+			collider.collider.take_damage(damage * damage_multiplier)
+			take_damage(hp)
+			dont_stun = true
+			return
+		
+		if not dont_stun:
+			collider.collider.take_damage(damage * damage_multiplier)
+			collider.collider.stun()
+			move_away = true
+			moveTimer.start()
 
 
 func _on_MoveAway_timeout():
 	move_away = false
+
+
+func _on_Timer_timeout():
+	pass # Replace with function body.

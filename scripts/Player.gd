@@ -8,13 +8,18 @@ var attack_cd := .5
 var velocity
 var is_stunned := false
 
+
 onready var sprite = $Sprite
+onready var effects = $Effects
 onready var stunTimer = $Stun
 onready var Gun = $Gun
+onready var ui = $Control
 
 
 func _init():
 	Global.Player = self
+	is_shielded = true
+	
 
 
 func _physics_process(_delta):
@@ -22,7 +27,13 @@ func _physics_process(_delta):
 
 
 func _process(_delta):
+	die()
 	Gun.is_stunned = is_stunned
+	Gun.is_dead = is_dead
+	effects.is_stunned = is_stunned
+	effects.is_shielded = is_shielded
+	effects.is_dead = is_dead
+	ui.player_hp = hp
 
 
 func get_input() -> Vector2:
@@ -32,7 +43,7 @@ func get_input() -> Vector2:
 
 
 func move():
-	if is_stunned:
+	if is_stunned or is_dead:
 		return
 	velocity = move_and_slide(get_input() * move_speed)
 
@@ -43,6 +54,9 @@ func take_damage(damage):
 
 
 func _on_Sprite_animation_finished():
+	if sprite.animation == "die":
+		sprite.playing = false
+		return
 	sprite.play("idle")
 
 
@@ -53,3 +67,8 @@ func stun(duration=1):
 
 func _on_Stun_timeout():
 	is_stunned = false
+
+
+func die():
+	if is_dead:
+		sprite.play("die")

@@ -39,7 +39,7 @@ func get_random_position() -> Vector2:
 	var y = rand_range(0, 1080)
 	
 	var half_x = 1920/2
-	var half_y = 1080/2
+	var _half_y = 1080/2
 	
 	if x <= (half_x):
 		x = -20

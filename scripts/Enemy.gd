@@ -6,6 +6,8 @@ class_name Enemy
 var ms = 100
 var collider
 var direction = Vector2.ZERO
+var damage_multiplier = 1
+export var damage = 10
 
 onready var Player = Global.Player
 onready var sprite = $Sprite
@@ -55,7 +57,7 @@ func position_sprite():
 func kamikaze():
 	if collider and collider.collider is IDamageable:
 		collider.collider.take_damage(10)
-		take_damage(100)
+		take_damage(hp)
 
 
 func _on_Sprite_animation_finished():
