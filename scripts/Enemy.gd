@@ -31,8 +31,8 @@ func _process(_delta):
 	position_sprite()
 
 
-func take_damage(damage):
-	.take_damage(damage)
+func take_damage(_damage):
+	.take_damage(_damage)
 	if is_dead:
 		$CollisionShape2D.set_deferred("disabled", true)
 

@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Players/Winter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Backgrounds/Background.jpg" type="Texture" id=2]
 [ext_resource path="res://scripts/BulletManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Navigation2D.gd" type="Script" id=4]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Points.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Players/Lucky.tscn" type="PackedScene" id=7]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 1891.1, 31.2685, 1892.17, 1037.84, 1709.56, 845.521, 1704.22, 196.789, 39.3882, 29.3972, 182.507, 188.78, 39.3882, 1037.84, 185.177, 861.539 )
@@ -31,9 +32,6 @@ texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 733.851, 575.789 )
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource( 3 )
@@ -65,5 +63,11 @@ navpoly = SubResource( 1 )
 [node name="Timer" type="Timer" parent="EnemyManager"]
 wait_time = 3.0
 autostart = true
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1196, 590 )
+
+[node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 558, 570 )
 
 [connection signal="timeout" from="EnemyManager/Timer" to="EnemyManager" method="_on_Timer_timeout"]

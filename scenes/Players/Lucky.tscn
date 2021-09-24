@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/characters/Lucky/Lucky_DEAD.PNG" type="Texture" id=2]
+[ext_resource path="res://scripts/Player/PlayerController.gd" type="Script" id=3]
+[ext_resource path="res://assets/characters/Lucky/Lucky_ATTACK.PNG" type="Texture" id=4]
+[ext_resource path="res://assets/characters/Lucky/Lucky.PNG" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "stunned",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), null, ExtResource( 5 ), null, ExtResource( 5 ), null ],
+"loop": true,
+"name": "damage",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+} ]
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+controller = {
+"controller": {
+"identifier": "P2",
+"selected": true
+},
+"kb": {
+"identifier": "P1",
+"selected": false
+}
+}
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 1 )

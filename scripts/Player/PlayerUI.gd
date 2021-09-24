@@ -1,7 +1,7 @@
 extends Control
 
 
-var player_hp = 100
+var player_hp
 
 onready var hp_bar = $hp
 

@@ -16,6 +16,10 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 
 func _on_Bullet_body_entered(body):
 	if body is IDamageable:
+		if body.is_invulnerable:
+			queue_free()
+			return
+		
 		body.take_damage(damage)
 		queue_free()
 

@@ -25,6 +25,9 @@ var dont_stun = false
 
 func kamikaze():
 	if collider and collider.collider is IDamageable:
+		if collider.collider.is_invulnerable:
+			return
+		
 		if collider.collider.is_shielded:
 			collider.collider.take_damage(damage * damage_multiplier)
 			take_damage(hp)
