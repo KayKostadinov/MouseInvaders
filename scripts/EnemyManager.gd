@@ -1,15 +1,8 @@
 extends Node2D
 
 
-onready var timer = $Timer
-var shootingMouse = preload("res://scenes/Enemies/ShootingMouse.tscn")
-var homingMouse = preload("res://scenes/Enemies/HomingMouse.tscn")
+onready var EnemyPool = $EnemyPool
 
-export var max_shooters = 10
-export var max_homing = 10
-
-var current_shooters = 0
-var current_homing = 0
 
 func _init():
 	Global.EnemyManager = self
@@ -19,19 +12,7 @@ func instance_mice(mouse):
 	var mouse_instance = mouse.instance()
 	randomize()
 	mouse_instance.position = get_random_position()
-	add_child(mouse_instance)
-
-
-func _on_Timer_timeout():
-	if current_shooters < max_shooters:
-		instance_mice(shootingMouse)
-		current_shooters += 1
-	
-	if current_homing < max_homing:
-		instance_mice(homingMouse)
-		current_homing += 1
-	
-	timer.start()
+	EnemyPool.add_child(mouse_instance)
 
 
 func get_random_position() -> Vector2:

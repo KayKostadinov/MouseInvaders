@@ -22,16 +22,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "stunned",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), null, ExtResource( 1 ), null, ExtResource( 1 ), null ],
 "loop": true,
 "name": "damage",
@@ -40,6 +30,16 @@ animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "die",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "stunned",
 "speed": 5.0
 } ]
 
@@ -50,15 +50,15 @@ animations = [ {
 "name": "off",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "shield",
-"speed": 40.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "stun",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "shield",
+"speed": 40.0
 } ]
 
 [sub_resource type="SpriteFrames" id=3]
@@ -201,8 +201,12 @@ wait_time = 0.2
 [node name="Inv" type="Timer" parent="."]
 wait_time = 0.35
 
+[node name="Respawn" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
 [connection signal="animation_finished" from="Gun/Sprite" to="Gun" method="_on_Sprite_animation_finished"]
 [connection signal="timeout" from="Stun" to="." method="_on_Stun_timeout"]
 [connection signal="timeout" from="Dash" to="." method="_on_Dash_timeout"]
 [connection signal="timeout" from="Inv" to="." method="_on_Inv_timeout"]
+[connection signal="timeout" from="Respawn" to="." method="_on_Respawn_timeout"]

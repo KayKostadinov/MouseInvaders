@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Menus/btn.tres" type="StyleBox" id=1]
+[ext_resource path="res://scripts/Menus/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://assets/Backgrounds/Background.jpg" type="Texture" id=3]
+[ext_resource path="res://scenes/Menus/btnHover.tres" type="StyleBox" id=4]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0.376471, 0.701961, 0.337255 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0.239216, 0.611765, 0.701961 )
+anti_aliasing = false
+
+[sub_resource type="DynamicFontData" id=2]
+antialiased = false
+font_path = "res://assets/fonts/PressStart2P-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+extra_spacing_top = 20
+extra_spacing_bottom = 20
+extra_spacing_space = 20
+font_data = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0, 0, 0.741176 )
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 20.0
+expand_margin_bottom = 20.0
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
+margin_left = 710.0
+margin_top = 375.0
+margin_right = 1210.0
+margin_bottom = 705.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Start" type="Button" parent="CenterContainer2/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 140.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.776471, 0.501961, 1, 1 )
+custom_colors/font_color_hover = Color( 0.388235, 0.721569, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.27451, 0.580392, 1 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="CenterContainer2/VBoxContainer"]
+margin_top = 190.0
+margin_right = 500.0
+margin_bottom = 330.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/normal = ExtResource( 1 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.776471, 0.501961, 1, 1 )
+custom_colors/font_color_hover = Color( 0.388235, 0.721569, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.27451, 0.580392, 1 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

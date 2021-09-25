@@ -5,11 +5,11 @@ var bullet_speed = Vector2(1000, 1000)
 var is_stunned = false
 var is_dead = false
 var use_controller = false
+var damage
 
 onready var BulletManager = Global.BulletManager
 onready var GunTip = $GunTip
 onready var sprite = $Sprite
-onready var player = get_tree().get_root()
 
 
 func _physics_process(_delta):
@@ -27,6 +27,7 @@ func instance_bullet():
 	bullet_instance.position = GunTip.global_position
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.velocity = bullet_instance.velocity.rotated(rotation)
+	bullet_instance.damage = damage
 	BulletManager.add_child(bullet_instance)
 
 func fire():
@@ -39,10 +40,11 @@ func fire():
 func _on_Sprite_animation_finished():
 	sprite.play("idle")
 
-
+# TODO: fix this shit
 func look_at_joystick():
-	var controller_angle = Vector2.ZERO
-	var xAxisRL = Input.get_joy_axis(0, JOY_ANALOG_RX)
-	var yAxisUD = Input.get_joy_axis(0, JOY_ANALOG_RY)
-	controller_angle = Vector2(xAxisRL, yAxisUD).angle()
-	rotation = controller_angle
+	look_at(global_position + get_controller_aim())
+
+func get_controller_aim():
+	var x = Input.get_action_strength("controller_aim_right")-Input.get_action_strength("controller_aim_left")
+	var y = Input.get_action_strength("controller_aim_down") - Input.get_action_strength("controller_aim_up")
+	return Vector2(x, y).normalized()

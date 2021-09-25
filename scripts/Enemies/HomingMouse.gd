@@ -5,10 +5,6 @@ var move_away = false
 onready var moveTimer = $MoveAway
 
 
-func _init():
-	damage = 5
-
-
 func _physics_process(delta):
 	move(delta, move_away)
 
@@ -18,7 +14,7 @@ func move(delta, _move_away):
 		if _move_away:
 			collider = move_and_collide(-direction * delta * ms * 5) 
 			return
-		look_at(Player.global_position)
+		look_at(player.global_position)
 		collider = move_and_collide(direction * delta * ms) 
 
 var dont_stun = false

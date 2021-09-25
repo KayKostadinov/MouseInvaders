@@ -2,9 +2,9 @@ extends IDamageable
 class_name Player
 
 
-var move_speed := 400
-var attack_damage := 20
-var attack_cd := .5
+export var move_speed := 400
+export var attack_damage := 10
+export var attack_cd := 1
 var velocity
 var is_stunned := false
 var dash = 1
@@ -16,16 +16,24 @@ onready var Gun = $Gun
 onready var ui = $Control
 onready var dashTimer = $Dash
 onready var invTimer = $Inv
+onready var RespawnTimer = $Respawn
 
 
 var Melee = preload("res://scenes/Melee.tscn")
 
 
 func _init():
-	Global.Player = self
+	if Global.Players.find(self) == -1:
+		Global.Players.append(self)
+
+
+func _ready():
+	Gun.damage = attack_damage
 
 
 func _physics_process(delta):
+	if is_stunned or is_dead:
+		return
 	move(delta)
 	melee_attack()
 	fire()
@@ -33,6 +41,8 @@ func _physics_process(delta):
 
 func _process(_delta):
 	die()
+	if is_dead:
+		RespawnTimer.start()
 	Gun.is_stunned = is_stunned
 	Gun.is_dead = is_dead
 	effects.is_stunned = is_stunned
@@ -48,8 +58,7 @@ func get_input() -> Vector2:
 
 
 func move(delta):
-	if is_stunned or is_dead:
-		return
+
 	if dash > 1:
 		var move_direction = get_input()
 		if move_direction == Vector2.ZERO:
@@ -92,8 +101,6 @@ func die():
 func melee_attack(_identifier="P1"):
 	if Input.is_action_just_pressed(_identifier + "_melee"):
 		is_invulnerable = true
-		collision_layer = 5
-		print(collision_layer)
 		var melee_instance = Melee.instance()
 		melee_instance.damage = attack_damage * 10
 		melee_instance.look_at(melee_instance.global_position + get_input())
@@ -118,3 +125,7 @@ func _on_Inv_timeout():
 func fire(_identifier="P1"):
 	if Input.is_action_just_pressed(_identifier + "_fire"):
 		Gun.fire()
+
+
+func _on_Respawn_timeout():
+	is_dead = false

@@ -2,23 +2,25 @@ extends IDamageable
 class_name Enemy
 
 
-
 var ms = 100
 var collider
 var direction = Vector2.ZERO
 var damage_multiplier = 1
+var player
+var already_collided = false
 export var damage = 10
 
-onready var Player = Global.Player
+onready var Players = Global.Players
 onready var sprite = $Sprite
 onready var timer = $Timer
+onready var GunTip = $GunTip
 
 var bullet = preload("res://scenes/EnemyBullet.tscn")
 
-onready var GunTip = $GunTip
 
 func _ready():
 	random_timer()
+	player = pick_player()
 
 
 func _physics_process(_delta):
@@ -27,8 +29,12 @@ func _physics_process(_delta):
 
 
 func _process(_delta):
+	if player.is_dead:
+		player = pick_player()
+	
 	direction = get_direction()
 	position_sprite()
+
 
 
 func take_damage(_damage):
@@ -43,11 +49,13 @@ func random_timer():
 
 
 func get_direction() -> Vector2:
-	return (Player.global_position - global_position).normalized()
+	if !player: return Vector2()
+	return (player.global_position - global_position).normalized()
 
 
 func position_sprite():
-	look_at(Player.global_position)
+	if !player: return
+	look_at(player.global_position)
 	if direction.x < 0:
 		sprite.flip_v = true
 		return
@@ -56,8 +64,10 @@ func position_sprite():
 
 func kamikaze():
 	if collider and collider.collider is IDamageable:
-		collider.collider.take_damage(10)
-		take_damage(hp)
+		if not already_collided:
+			already_collided = true
+			collider.collider.take_damage(10)
+			take_damage(hp)
 
 
 func _on_Sprite_animation_finished():
@@ -72,3 +82,17 @@ func die():
 		sprite.play("die")
 
 
+func pick_player():
+	var players_alive = []
+	for p in Players:
+		if p and not p.is_dead:
+			players_alive.append(p)
+	
+	if players_alive.size() == 0:
+		var _change_scene = get_tree().change_scene("res://scenes/Menus/MainMenu.tscn")
+		return
+	
+	randomize()
+	var index = randi() % players_alive.size()
+	
+	return Players[index]

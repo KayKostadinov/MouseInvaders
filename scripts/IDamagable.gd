@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name IDamageable
 
-var hp := 100
+export var hp := 100
 var is_dead = false
 var is_shielded = false
 var is_invulnerable = false
