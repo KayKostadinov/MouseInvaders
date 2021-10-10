@@ -2,14 +2,17 @@ extends Control
 
 
 var player_hp
+var player_energy
 
 onready var hp_bar = $hp
+onready var energy = $energy
 
 export var hp_colors = [Color(), Color(), Color()]
 
 
 func _process(delta):
 	hp_bar.value = player_hp
+	energy.value = player_energy
 	set_hp_color(player_hp)
 
 

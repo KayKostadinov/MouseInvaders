@@ -2,6 +2,7 @@ extends Area2D
 class_name Bullet
 
 
+var shooter
 var velocity = Vector2(1000, 0)
 var damage = 20
 
@@ -20,6 +21,6 @@ func _on_Bullet_body_entered(body):
 			queue_free()
 			return
 		
-		body.take_damage(damage)
+		body.take_damage(damage, shooter)
 		queue_free()
 

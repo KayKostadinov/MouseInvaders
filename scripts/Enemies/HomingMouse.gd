@@ -3,7 +3,7 @@ extends Enemy
 
 var move_away = false
 onready var moveTimer = $MoveAway
-
+onready var hit = $Hit
 
 func _physics_process(delta):
 	move(delta, move_away)
@@ -23,7 +23,7 @@ func kamikaze():
 	if collider and collider.collider is IDamageable:
 		if collider.collider.is_invulnerable:
 			return
-		
+		hit.play()
 		if collider.collider.is_shielded:
 			collider.collider.take_damage(damage * damage_multiplier)
 			take_damage(hp)
@@ -43,3 +43,7 @@ func _on_MoveAway_timeout():
 
 func _on_Timer_timeout():
 	pass # Replace with function body.
+
+
+func _on_Hit_finished():
+	hit.stop()

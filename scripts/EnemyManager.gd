@@ -8,11 +8,12 @@ func _init():
 	Global.EnemyManager = self
 
 
-func instance_mice(mouse):
-	var mouse_instance = mouse.instance()
-	randomize()
-	mouse_instance.position = get_random_position()
-	EnemyPool.add_child(mouse_instance)
+func instance_mice(mouse, batch):
+	for i in batch:
+		var mouse_instance = mouse.instance()
+		randomize()
+		mouse_instance.position = get_random_position()
+		EnemyPool.add_child(mouse_instance)
 
 
 func get_random_position() -> Vector2:

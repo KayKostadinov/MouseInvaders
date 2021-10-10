@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/VFX/Glow.png" type="Texture" id=1]
+[ext_resource path="res://assets/VFX/IMG_0093.PNG" type="Texture" id=2]
+[ext_resource path="res://scripts/Pickable.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 33.2767
+
+[sub_resource type="Animation" id=3]
+resource_name = "Glow"
+length = 4.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Glow:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2, 4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Glow:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2, 4 )
+}
+
+[node name="Pickable" type="Area2D"]
+collision_layer = 32
+script = ExtResource( 3 )
+type = "shield"
+timer = 15
+
+[node name="Glow" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+texture_scale = 0.5
+color = Color( 0.584314, 0.933333, 1, 1 )
+range_item_cull_mask = 2
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Glow"
+anims/Glow = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_Pickable_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

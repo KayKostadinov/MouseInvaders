@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Pickable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Pickables/IMG_0191.PNG" type="Texture" id=2]
+[ext_resource path="res://scenes/Pickables/IMG_0192.PNG" type="Texture" id=3]
+[ext_resource path="res://scenes/Pickables/IMG_0193.PNG" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Area2D
+
+
+export(String, \"health\", \"shield\", \"energy\", \"weapon boost\") var type
+export var amount = 100
+export var timer = 5
+
+func _ready():
+	$Timer.start(timer)
+
+func _on_Pickable_body_entered(body):
+	body.pick_up(type, amount)
+	queue_free()
+
+
+func _on_Timer_timeout():
+	queue_free()
+"
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Glow.png-432569445bf61e79f2f8b3ae3d6b5059.stex"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="Pickable" instance=ExtResource( 1 )]
+script = SubResource( 4 )
+type = "energy"
+amount = 30
+timer = 10
+
+[node name="Glow" parent="." index="0"]
+texture = SubResource( 3 )
+color = Color( 0.584314, 0.698039, 1, 1 )
+
+[node name="Sprite" parent="." index="1"]
+frames = SubResource( 2 )
+playing = true

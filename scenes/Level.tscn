@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Players/Winter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Backgrounds/Background.jpg" type="Texture" id=2]
@@ -6,25 +6,46 @@
 [ext_resource path="res://scripts/Navigation2D.gd" type="Script" id=4]
 [ext_resource path="res://scripts/EnemyManager.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Points.gd" type="Script" id=6]
-[ext_resource path="res://scenes/Players/Lucky.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scripts/LevelManager.gd" type="Script" id=8]
 [ext_resource path="res://scripts/EnemyPool.gd" type="Script" id=9]
 [ext_resource path="res://assets/music/Star Wars I - Star Wars Main Title And The Arrival At Naboo.mp3" type="AudioStream" id=10]
 [ext_resource path="res://scenes/Menus/PauseMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/ScreenShake.tscn" type="PackedScene" id=13]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 1891.1, 31.2685, 1892.17, 1037.84, 1709.56, 845.521, 1704.22, 196.789, 39.3882, 29.3972, 182.507, 188.78, 39.3882, 1037.84, 185.177, 861.539 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 0, 3, 5 ), PoolIntArray( 6, 4, 5, 7 ), PoolIntArray( 2, 1, 6, 7 ) ]
-outlines = [ PoolVector2Array( 39.3882, 29.3972, 39.3882, 1037.84, 1892.17, 1037.84, 1891.1, 31.2685 ), PoolVector2Array( 182.507, 188.78, 185.177, 861.539, 1709.56, 845.521, 1704.22, 196.789 ) ]
+vertices = PoolVector2Array( 1678.81, 843.073, 1868.81, 1025.07, 68.8093, 1029.07, 242.809, 845.073, 68.8093, 31.0727, 236.809, 203.073, 1866.81, 31.0727, 1665.89, 193.663 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 5, 4, 6, 7 ), PoolIntArray( 6, 1, 0, 7 ) ]
+outlines = [ PoolVector2Array( 68.8093, 31.0727, 68.8093, 1029.07, 1868.81, 1025.07, 1866.81, 31.0727 ), PoolVector2Array( 236.809, 203.073, 242.809, 845.073, 1678.81, 843.073, 1665.89, 193.663 ) ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 7 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 8 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 961.622, 540.757 )
+current = true
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 13 )]
+
 [node name="EnemySpawn" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 10.0
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = -15.0
+autoplay = true
 
 [node name="Bounds" type="StaticBody2D" parent="."]
 collision_layer = 16
@@ -37,6 +58,7 @@ __meta__ = {
 polygon = PoolVector2Array( -10, 1080, 1943, 1084, 1941.56, -22.4626, -4.63855, -17.1232, -6, 1076, -71.3806, 1077.45, -60.7018, -57.1684, 1984.27, -70.5168, 1989.61, 1178.89, -79.3896, 1162.88, -47.3535, 1104.14 )
 
 [node name="bg" type="Sprite" parent="."]
+light_mask = 2
 position = Vector2( 964, 544 )
 scale = Vector2( 1.0125, 1.03704 )
 texture = ExtResource( 2 )
@@ -54,16 +76,16 @@ script = ExtResource( 5 )
 script = ExtResource( 6 )
 
 [node name="Position2D" type="Position2D" parent="EnemyManager/Points"]
-position = Vector2( 68.0358, 60.4762 )
+position = Vector2( 128.617, 124.621 )
 
 [node name="Position2D2" type="Position2D" parent="EnemyManager/Points"]
-position = Vector2( 1814.29, 93.2342 )
+position = Vector2( 1784, 112.834 )
 
 [node name="Position2D3" type="Position2D" parent="EnemyManager/Points"]
-position = Vector2( 1804.21, 955.021 )
+position = Vector2( 1789.96, 910.476 )
 
 [node name="Position2D4" type="Position2D" parent="EnemyManager/Points"]
-position = Vector2( 88.1943, 985.259 )
+position = Vector2( 138.085, 933.587 )
 
 [node name="Navigation2D" type="Navigation2D" parent="EnemyManager"]
 script = ExtResource( 4 )
@@ -74,26 +96,53 @@ navpoly = SubResource( 1 )
 [node name="EnemyPool" type="Node2D" parent="EnemyManager"]
 script = ExtResource( 9 )
 
-[node name="Player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 558, 570 )
-
-[node name="Player" parent="." instance=ExtResource( 7 )]
-controller = {
-"controller": {
-"identifier": "P2",
-"selected": true
-},
-"kb": {
-"identifier": "P1",
-"selected": false
-}
+[node name="Title" type="CenterContainer" parent="."]
+anchor_right = 1.0
+margin_right = 1920.0
+margin_bottom = 500.0
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
-[node name="PauseMenu" parent="." instance=ExtResource( 11 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="Title"]
+margin_left = 864.0
+margin_top = 234.0
+margin_right = 1056.0
+margin_bottom = 266.0
+custom_constants/separation = 50
+
+[node name="LevelLabel" type="Label" parent="Title/VBoxContainer"]
+visible = false
+margin_right = 350.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 2 )
+text = "Boss Level"
+align = 1
+
+[node name="WaveTitle" type="Label" parent="Title/VBoxContainer"]
+margin_right = 192.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 3 )
+text = "Wave 1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.733333, 0.733333, 0.733333, 1 )
+
+[node name="Menus" type="Node2D" parent="."]
+z_index = 10
+
+[node name="PauseMenu" parent="Menus" instance=ExtResource( 11 )]
 visible = false
 margin_left = 576.651
 margin_top = 261.629
 margin_right = 576.651
 margin_bottom = 261.629
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
 [connection signal="timeout" from="EnemySpawn" to="." method="_on_EnemySpawn_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

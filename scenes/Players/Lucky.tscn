@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/characters/Lucky/Lucky_DEAD.PNG" type="Texture" id=2]
 [ext_resource path="res://scripts/Player/PlayerController.gd" type="Script" id=3]
 [ext_resource path="res://assets/characters/Lucky/Lucky_ATTACK.PNG" type="Texture" id=4]
 [ext_resource path="res://assets/characters/Lucky/Lucky.PNG" type="Texture" id=5]
+[ext_resource path="res://assets/SFX/bark.mp3" type="AudioStream" id=6]
+[ext_resource path="res://assets/VFX/Guns/IMG_0160.PNG" type="Texture" id=7]
+[ext_resource path="res://assets/VFX/Guns/IMG_0161.PNG" type="Texture" id=8]
+[ext_resource path="res://scripts/Player/LuckyGun.gd" type="Script" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -13,14 +17,14 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "attack",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "stunned",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ), null, ExtResource( 5 ), null, ExtResource( 5 ), null ],
@@ -30,8 +34,21 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "die",
+"name": "stunned",
 "speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "fire",
+"speed": 10.0
 } ]
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -49,3 +66,12 @@ controller = {
 
 [node name="Sprite" parent="." index="0"]
 frames = SubResource( 1 )
+
+[node name="Gun" parent="." index="2"]
+script = ExtResource( 9 )
+
+[node name="Sprite" parent="Gun" index="0"]
+frames = SubResource( 2 )
+
+[node name="Laser" parent="Gun" index="2"]
+stream = ExtResource( 6 )

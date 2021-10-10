@@ -15,6 +15,10 @@ onready var sprite = $Sprite
 onready var timer = $Timer
 onready var GunTip = $GunTip
 
+var HealthPickup = preload("res://scenes/Pickables/PickHealth.tscn")
+var ShieldPickup = preload("res://scenes/Pickables/PickShield.tscn")
+var EnergyPickup = preload("res://scenes/Pickables/PickEnergy.tscn")
+var WeaponPickup = preload("res://scenes/Pickables/PickWeapon.tscn")
 var bullet = preload("res://scenes/EnemyBullet.tscn")
 
 
@@ -37,10 +41,27 @@ func _process(_delta):
 
 
 
-func take_damage(_damage):
-	.take_damage(_damage)
+func take_damage(damage, shooter=null):
+	.take_damage(damage, shooter)
 	if is_dead:
 		$CollisionShape2D.set_deferred("disabled", true)
+		randomize()
+		var dropChance = randi() % 100 + 1
+		if dropChance <= 7:
+			instance_pickup(HealthPickup)
+		elif dropChance <= 15:
+			instance_pickup(ShieldPickup)
+		elif dropChance <= 25:
+			instance_pickup(EnergyPickup)
+#		elif dropChance <= 40:
+		else:
+			instance_pickup(WeaponPickup)
+
+
+func instance_pickup(pickup_node):
+	var pickupInstance = pickup_node.instance()
+	pickupInstance.global_position = global_position
+	get_tree().root.add_child(pickupInstance)
 
 
 func random_timer():
@@ -96,3 +117,7 @@ func pick_player():
 	var index = randi() % players_alive.size()
 	
 	return Players[index]
+
+
+func _on_Enemy_tree_exited():
+	pass # Replace with function body.

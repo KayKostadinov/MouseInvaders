@@ -15,6 +15,6 @@ func _process(delta):
 
 func is_stage_cleared() -> bool:
 	var children = get_children().size()
-	if max_enemies == passed_enemies and children == 0:
+	if max_enemies <= passed_enemies and children == 0:
 		return true
 	return false

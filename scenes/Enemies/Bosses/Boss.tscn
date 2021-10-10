@@ -1,0 +1,126 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0133.PNG" type="Texture" id=1]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0131.PNG" type="Texture" id=2]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0132.PNG" type="Texture" id=3]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0130.PNG" type="Texture" id=4]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0124.PNG" type="Texture" id=5]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0125.PNG" type="Texture" id=6]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0128.PNG" type="Texture" id=7]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0126.PNG" type="Texture" id=8]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0127.PNG" type="Texture" id=9]
+[ext_resource path="res://assets/characters/Bosses/Spinner/IMG_0129(1).PNG" type="Texture" id=10]
+[ext_resource path="res://scenes/Enemies/Bosses/Boss.gd" type="Script" id=11]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 44.7635
+height = 191.546
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 50.5557
+height = 99.795
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "stage2_idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "stage2",
+"speed": 9.0
+} ]
+
+[sub_resource type="Animation" id=4]
+length = 68.0
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 951.426, -0.25, 0, 0.6, 21.0573, 951.426, -0.25, 0, 0.6, 21.0573, 426.163, -0.55, -5.77634, 0.72, 112.899, 426.163, -0.55, -5.77634, 0.72, 112.899, 306.018, -0.66, -107.502, 0.53, -92.0227, 306.018, -0.66, -107.502, 0.53, -92.0227, 454.298, -0.35, 69.2843, 0.82, -8.11237, 454.298, -0.35, 69.2843, 0.82, -8.11237, 894.793, -0.69, 5.45288, 0.66, -4.8667, 894.793, -0.69, 5.45288, 0.66, -4.8667, 1334.87, -0.66, 14.2778, 0.74, 9.11816, 1334.87, -0.66, 14.2778, 0.74, 9.11816, 1589.28, -0.55, 53.9727, 0.72, 33.3337, 1589.28, -0.55, 53.9727, 0.72, 33.3337, 856.385, -0.58, -12.8964, 0.53, -49.0148, 856.385, -0.58, -12.8964, 0.53, -49.0148, 928.772, -0.42, 110.787, 0.25, 0, 928.772, -0.42, 110.787, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.1, 8, 12, 16, 20, 24.2, 27.9, 32.1, 36.3, 40.2, 44, 48.1, 52.2, 56.2, 60, 63.8, 68 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 260.509, -0.25, 0, 0.4, -61.9935, 260.509, -0.25, 0, 0.4, -61.9935, 300.115, -0.54, 63.5141, 0.48, -3.56308, 300.115, -0.54, 63.5141, 0.48, -3.56308, 722.754, -0.59, 7.21881, 0.6, -8.2605, 722.754, -0.59, 7.21881, 0.6, -8.2605, 339.682, -0.54, -37.9709, 0.65, 13.6269, 339.682, -0.54, -37.9709, 0.65, 13.6269, 245.407, -0.49, -83.0101, 0.65, -36.5721, 245.407, -0.49, -83.0101, 0.65, -36.5721, 333.055, -0.44, 82.1714, 0.58, -36.5035, 333.055, -0.44, 82.1714, 0.58, -36.5035, 764.285, -0.48, 63.7241, 0.4, 110.162, 764.285, -0.48, 63.7241, 0.4, 110.162, 769.124, -0.26, -142.347, 0.690001, 7.28699, 769.124, -0.26, -142.347, 0.690001, 7.28699, 260.509, -0.48, 15.4031, 0.25, 0, 260.509, -0.48, 15.4031, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.1, 8, 12, 16, 20, 24.2, 27.9, 32.1, 36.3, 40.2, 44, 48.1, 52.2, 56.2, 60, 63.8, 68 )
+}
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.180392, 0.180392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.27451, 0, 0, 1 )
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[node name="Boss" type="KinematicBody2D"]
+position = Vector2( 274.977, 720.737 )
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 11 )
+
+[node name="ShipCollision" type="CollisionShape2D" parent="."]
+position = Vector2( -6.23633, 64.1447 )
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="MouseCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 2.67267, -83.7445 )
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+animation = "stage2_idle"
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Laser" type="Position2D" parent="Points"]
+position = Vector2( 9.34387, 212.24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 4 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="ProgressBar" parent="Control"]
+margin_left = -195.0
+margin_top = -230.0
+margin_right = 191.0
+margin_bottom = -213.0
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

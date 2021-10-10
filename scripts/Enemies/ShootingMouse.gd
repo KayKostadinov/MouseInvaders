@@ -5,6 +5,7 @@ class_name ShootingMouse
 onready var BulletManager = Global.BulletManager
 onready var navigation = Global.navigation
 onready var points = Global.points
+onready var laser = $Laser
 
 export var nav_stop_threshold = 5
 
@@ -74,6 +75,7 @@ func get_movement_direction():
 
 func shoot():
 	sprite.play("shoot")
+	laser.play()
 	var bullet_instance = bullet.instance()
 	bullet_instance.position = GunTip.global_position
 	bullet_instance.rotation_degrees = rotation_degrees

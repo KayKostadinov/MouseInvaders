@@ -6,10 +6,12 @@ var is_stunned = false
 var is_dead = false
 var use_controller = false
 var damage
+var shooter
 
 onready var BulletManager = Global.BulletManager
 onready var GunTip = $GunTip
 onready var sprite = $Sprite
+onready var laser = $Laser
 
 
 func _physics_process(_delta):
@@ -28,11 +30,12 @@ func instance_bullet():
 	bullet_instance.rotation_degrees = rotation_degrees
 	bullet_instance.velocity = bullet_instance.velocity.rotated(rotation)
 	bullet_instance.damage = damage
+	bullet_instance.shooter = shooter
 	BulletManager.add_child(bullet_instance)
 
 func fire():
-
 	sprite.play("fire")
+	laser.play()
 	instance_bullet()
 
 
